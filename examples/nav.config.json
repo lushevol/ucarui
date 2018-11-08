@@ -189,6 +189,10 @@
             {
               "path": "/notification",
               "title": "Notification 通知"
+            },
+            {
+              "path": "/callpanel",
+              "title": "Callpanel 通话面板"
             }
           ]
         },

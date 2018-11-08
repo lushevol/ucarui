@@ -42,6 +42,7 @@ import Tag from '../packages/tag/index.js';
 import Tree from '../packages/tree/index.js';
 import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
+import Callpanel from '../packages/callpanel/index.js';
 import Slider from '../packages/slider/index.js';
 import Loading from '../packages/loading/index.js';
 import Icon from '../packages/icon/index.js';
@@ -113,6 +114,7 @@ const components = [
   Tag,
   Tree,
   Alert,
+  Callpanel,
   Slider,
   Icon,
   Row,
@@ -162,6 +164,7 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$confirm = MessageBox.confirm;
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
+  Vue.prototype.$callpanel = Callpanel;
   Vue.prototype.$message = Message;
 
 };
@@ -172,7 +175,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '2.4.9',
+  version: '0.0.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -220,6 +223,7 @@ module.exports = {
   Tree,
   Alert,
   Notification,
+  Callpanel,
   Slider,
   Icon,
   Row,

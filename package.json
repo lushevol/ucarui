@@ -1,7 +1,7 @@
 {
-  "name": "element-ui",
-  "version": "2.4.9",
-  "description": "A Component Library for Vue.js.",
+  "name": "ucarui",
+  "version": "0.0.2",
+  "description": "UI Toolkit for UCarInc DevOps based on element-ui",
   "main": "lib/element-ui.common.js",
   "files": [
     "lib",
@@ -11,7 +11,7 @@
   ],
   "typings": "types/index.d.ts",
   "scripts": {
-    "bootstrap": "yarn || npm i",
+    "bootstrap": "cnpm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
@@ -34,13 +34,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ElemeFE/element.git"
+    "url": "git@github.com:lushevol/ucarui.git"
   },
-  "homepage": "http://element.eleme.io",
+  "homepage": "",
   "keywords": [
-    "eleme",
+    "ucar",
     "vue",
-    "components"
+    "ui"
   ],
   "license": "MIT",
   "bugs": {
@@ -72,7 +72,7 @@
     "chai": "^3.5.0",
     "cheerio": "^0.18.0",
     "chokidar": "^1.7.0",
-    "copy-webpack-plugin": "^4.1.1",
+    "copy-webpack-plugin": "^4.6.0",
     "coveralls": "^2.11.14",
     "cp-cli": "^1.0.2",
     "cross-env": "^3.1.3",
@@ -118,6 +118,7 @@
     "postcss-loader": "0.11.1",
     "postcss-salad": "^1.0.8",
     "progress-bar-webpack-plugin": "^1.11.0",
+    "readable-stream": "^3.0.6",
     "rimraf": "^2.5.4",
     "sass-loader": "^6.0.6",
     "sinon": "^1.17.6",

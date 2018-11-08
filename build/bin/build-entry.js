@@ -40,6 +40,7 @@ const install = function(Vue, opts = {}) {
   Vue.prototype.$confirm = MessageBox.confirm;
   Vue.prototype.$prompt = MessageBox.prompt;
   Vue.prototype.$notify = Notification;
+  Vue.prototype.$callpanel = Callpanel;
   Vue.prototype.$message = Message;
 
 };

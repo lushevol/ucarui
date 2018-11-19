@@ -318,7 +318,7 @@ $--notification-danger-color: $--color-danger !default;
 /* Callpanel
 -------------------------- */
 $--callpanel-width: 330px !default;
-$--callpanel-height: 160px !default;
+$--callpanel-height: 190px !default;
 $--callpanel-padding: 14px 26px 14px 13px !default;
 $--callpanel-radius: 8px !default;
 $--callpanel-shadow: $--box-shadow-light !default;
@@ -334,6 +334,8 @@ $--callpanel-header-height: 25px !default;
 $--callpanel-header-padding: 5px !default;
 $--callpanel-footer-height: 40px !default;
 $--callpanel-avatar-width: 64px !default;
+
+$--callpanel-tips-height: 30px !default;
 
 $--callpanel-close-color: $--color-text-secondary !default;
 $--callpanel-close-hover-color: $--color-text-regular !default;

@@ -13,7 +13,34 @@
           v-if="type || iconClass">
         </i>
         <h3 class="el-callpanel__title" v-text="callText"></h3>
+        <div class="operation">
+          <div class="mic" @click="show.mic = !show.mic">
+            <img v-show="show.mic" src="~examples/assets/images/mic.svg" alt="点击静音">
+            <img v-show="!show.mic" src="~examples/assets/images/nomic.svg" alt="点击静音">
+          </div>
+          <div class="sound" @click="show.sound = !show.sound">
+            <img v-show="show.sound" src="~examples/assets/images/sound.svg" alt="点击静音">
+            <img v-show="!show.sound" src="~examples/assets/images/mute.svg" alt="点击静音">
+          </div>
+          <div class="record" @click="record">
+            <img src="~examples/assets/images/record.svg" />
+          </div>
+          <!-- <el-dropdown @command="handleCommand">
+            <span>...</span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="record">录音</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown> -->
+        </div>
       </div>
+      <transition>
+        <div class="el-callpanel__tips" v-show="showTips">
+          <div class="record" v-show="show.record">
+            <span>正在录音...</span>
+            <el-button size="mini" @click="finishRecord">完成</el-button>
+          </div>
+        </div>
+      </transition>
       <div class="el-callpanel__content">
         <div class="el-callpanel__content_avatar">
           <a>
@@ -25,6 +52,7 @@
           <p v-text="info.pnumber"></p>
         </div>
         <div class="el-callpanel__content_timer" v-show="info.timerClock > 0">
+          <p>通话时长</p>
           <h3>{{timerMin}} : {{timerSec}}</h3>
         </div>
       </div>
@@ -81,7 +109,13 @@
           progress: 0 // 0 等待接听，1 通话中， 2 通话结束
         },
         onAccept: null,
-        onHungup: null
+        onHungup: null,
+        onRecord: null,
+        show: {
+          record: false, // 录音组件
+          mic: true, // 语音按钮
+          sound: true // 声音按钮
+        }
       };
     },
     components: {
@@ -123,6 +157,9 @@
       },
       callText() {
         return (this.call.type === 'audio' ? '语音' : '视频') + (this.call.direction === 'in' ? '来电' : '邀请');
+      },
+      showTips() {
+        return this.show.record || '';
       }
     },
 
@@ -196,6 +233,29 @@
           this.onHungup();
         }
         this.call.progress = 2;
+      },
+      // handleCommand(command) {
+      //   switch (command) {
+      //     case 'record':
+      //       // TODO
+      //       this.show.record = true;
+      //       if (typeof this.onRecord === 'function') {
+      //         this.onRecord();
+      //       }
+      //       break;
+      //     default:
+      //       break;
+      //   }
+      // },
+      record() {
+        // TODO
+        this.show.record = true;
+        if (typeof this.onRecord === 'function') {
+          this.onRecord();
+        }
+      },
+      finishRecord() {
+
       }
     }
   };

@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: $--callpanel-width;
-  height: $--callpanel-height;
+  max-height: $--callpanel-height;
   // padding: $--callpanel-padding;
   // border-radius: $--callpanel-radius;
   box-sizing: border-box;
@@ -24,55 +24,36 @@
     left: 16px;
   }
 
-  // @include e(group) {
-  //   margin-left: $--callpanel-group-margin;
-  // }
-
-  // @include e(title) {
-  //   font-weight: bold;
-  //   font-size: $--callpanel-title-font-size;
-  //   color: $--callpanel-title-color;
-  //   margin: 0;
-  // }
-
-  // @include e(content) {
-  //   font-size: $--callpanel-font-size;
-  //   line-height: 21px;
-  //   margin: 6px 0 0 0;
-  //   color: $--callpanel-color;
-  //   text-align: justify;
-
-  //   p {
-  //     margin: 0;
-  //   }
-  // }
-
-  // @include e(icon) {
-  //   height: $--callpanel-icon-size;
-  //   width: $--callpanel-icon-size;
-  //   font-size: $--callpanel-icon-size;
-  // }
-
-  // @include e(closeBtn) {
-  //   position: absolute;
-  //   top: 18px;
-  //   right: 15px;
-  //   cursor: pointer;
-  //   color: $--callpanel-close-color;
-  //   font-size: $--callpanel-close-font-size;
-
-  //   &:hover {
-  //     color: $--callpanel-close-hover-color;
-  //   }
-  // }
-
   @include e(header) {
     height: $--callpanel-header-height;
     padding: $--callpanel-header-padding;
     border-bottom: 1px solid $--cutting-line-color;
+    display: flex;
     h3 {
       margin: 0;
       padding: 0;
+      flex: 1;
+    }
+    .operation {
+      display: flex;
+      cursor: pointer;
+      .mic, .sound, .record {
+        img {
+          margin: 3px;
+          height: $--callpanel-header-height - 6px;
+        }
+      }
+      // .el-dropdown {
+      //   margin: 3px;
+      // }
+    }
+  }
+
+  @include e(tips) {
+    height: $--callpanel-tips-height;
+    .record {
+      background: #e8e8e8;
+      text-align: center;
     }
   }
 
@@ -98,6 +79,7 @@
       padding-left: 20px;
     }
     &_timer {
+      text-align: center;
       width: 40%;
     }
   }

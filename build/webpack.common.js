@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(process.cwd(), './lib'),
     publicPath: '/dist/',
-    filename: 'element-ui.common.js',
+    filename: 'ucarui.common.js',
     chunkFilename: '[id].js',
     libraryTarget: 'commonjs2'
   },

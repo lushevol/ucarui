@@ -1,8 +1,8 @@
 {
   "name": "ucarui",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "UI Toolkit for UCarInc DevOps based on element-ui",
-  "main": "lib/element-ui.common.js",
+  "main": "lib/ucarui.common.js",
   "files": [
     "lib",
     "src",

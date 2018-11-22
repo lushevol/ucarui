@@ -94,6 +94,8 @@
         iconClass: '',
         onClose: null,
         onClick: null,
+        onSetSound: null,
+        onSetMic: null,
         closed: false,
         verticalOffset: 0,
         timer: null,
@@ -179,6 +181,16 @@
         } else if (newVal === 2) {
           this.close();
         }
+      },
+      'show.mic': function(newVal) {
+        if (typeof this.onSetMic === 'function') {
+          this.onSetMic(newVal);
+        }
+      },
+      'show.sound': function(newVal) {
+        if (typeof this.onSetSound === 'function') {
+          this.onSetSound(newVal);
+        }
       }
     },
     mounted() {
@@ -251,10 +263,15 @@
         // TODO
         this.show.record = true;
         if (typeof this.onRecord === 'function') {
-          this.onRecord();
+          this.onRecord(this.show.record);
         }
       },
       finishRecord() {
+        // TODO
+        this.show.record = false;
+        if (typeof this.onRecord === 'function') {
+          this.onRecord(this.show.record);
+        }
 
       }
     }

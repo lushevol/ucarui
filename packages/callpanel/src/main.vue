@@ -267,7 +267,7 @@
         // TODO
         // 只有当通话中才能够录音
         // 若正在录音（clock > 0），则不能录音
-        if(this.call.progress !== 1 || this.record.clock > 0) {
+        if (this.call.progress !== 1 || this.record.clock > 0) {
           return false;
         }
         // 展示录音效果

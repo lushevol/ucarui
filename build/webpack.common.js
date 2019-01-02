@@ -81,7 +81,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: path.posix.join('static', '[name].[hash:7].[ext]')
+          name: path.posix.join('static', 'media/[name].[hash:7].[ext]')
         }
       }
     ]

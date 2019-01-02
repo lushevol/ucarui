@@ -44,18 +44,6 @@ const Callpanel = function(options) {
   return instance;
 };
 
-['success', 'warning', 'info', 'error'].forEach(type => {
-  Callpanel[type] = options => {
-    if (typeof options === 'string' || isVNode(options)) {
-      options = {
-        message: options
-      };
-    }
-    options.type = type;
-    return Callpanel(options);
-  };
-});
-
 Callpanel.close = function(id, userOnClose) {
   let index = -1;
   const len = instances.length;

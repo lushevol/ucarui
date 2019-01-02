@@ -12,17 +12,17 @@
           :class="[ typeClass, iconClass ]"
           v-if="type || iconClass">
         </i>
-        <h3 class="el-callpanel__title" v-text="callText"></h3>
+        <span class="el-callpanel__title" v-text="callText"></span>
         <div class="operation">
           <div class="mic" @click="show.mic = !show.mic">
-            <img v-show="show.mic" src="~examples/assets/images/mic.svg" alt="点击静音">
-            <img v-show="!show.mic" src="~examples/assets/images/nomic.svg" alt="点击静音">
+            <img v-show="show.mic" src="~examples/assets/images/mic.svg" title="禁止麦克风">
+            <img v-show="!show.mic" src="~examples/assets/images/nomic.svg" title="开启麦克风">
           </div>
           <div class="sound" @click="show.sound = !show.sound">
-            <img v-show="show.sound" src="~examples/assets/images/sound.svg" alt="点击静音">
-            <img v-show="!show.sound" src="~examples/assets/images/mute.svg" alt="点击静音">
+            <img v-show="show.sound" src="~examples/assets/images/sound.svg" title="点击静音">
+            <img v-show="!show.sound" src="~examples/assets/images/mute.svg" title="取消静音">
           </div>
-          <div class="record" @click="record">
+          <div class="record" @click="makeRecord">
             <img src="~examples/assets/images/record.svg" />
           </div>
           <!-- <el-dropdown @command="handleCommand">
@@ -36,7 +36,8 @@
       <transition>
         <div class="el-callpanel__tips" v-show="showTips">
           <div class="record" v-show="show.record">
-            <span>正在录音...</span>
+            <span v-if="record.clock > 0">{{recordTimerMin}}:{{recordTimerSec}}</span>
+            <span v-else>正在录音...</span>
             <el-button size="mini" @click="finishRecord">完成</el-button>
           </div>
         </div>
@@ -53,7 +54,7 @@
         </div>
         <div class="el-callpanel__content_timer" v-show="info.timerClock > 0">
           <p>通话时长</p>
-          <h3>{{timerMin}} : {{timerSec}}</h3>
+          <h3 class="clock">{{timerMin}} : {{timerSec}}</h3>
         </div>
       </div>
       <div class="el-callpanel__footer">
@@ -100,7 +101,7 @@
         position: 'bottom-right',
         info: {
           userName: '陌生号码',
-          pnumber: 123456,
+          pnumber: '',
           timerClock: 0
         },
         call: {
@@ -108,9 +109,14 @@
           direction: 'in', // in 拨入， out 拨出
           progress: 0 // 0 等待接听，1 通话中， 2 通话结束
         },
+        record: {
+          clock: 0,
+          timer: null
+        },
         onAccept: null,
         onHungup: null,
         onRecord: null,
+        onRecordDone: null,
         show: {
           record: false, // 录音组件
           mic: true, // 语音按钮
@@ -146,6 +152,12 @@
       timerMin() {
         return Math.floor(this.info.timerClock / 60);
       },
+      recordTimerSec() {
+        return this.record.clock % 60;
+      },
+      recordTimerMin() {
+        return Math.floor(this.record.clock / 60);
+      },
       progressText() {
         if (this.call.progress === 0) {
           return '等待接听';
@@ -156,7 +168,7 @@
         }
       },
       callText() {
-        return (this.call.type === 'audio' ? '语音' : '视频') + (this.call.direction === 'in' ? '来电' : '邀请');
+        return (this.call.type === 'audio' ? '语音' : '视频') + (this.call.direction === 'in' ? '来电' : '拨打');
       },
       showTips() {
         return this.show.record || '';
@@ -206,13 +218,17 @@
 
       close() {
         this.closed = true;
+        this.$refs.ringTone.pause();
+        this.$refs.ringBackTone.pause();
+        this.clearTimer();
         if (typeof this.onClose === 'function') {
           this.onClose();
         }
       },
 
       clearTimer() {
-        clearTimeout(this.timer);
+        clearInterval(this.timer);
+        this.info.timerClock = 0;
       },
 
       startTimer() {
@@ -247,15 +263,39 @@
       //       break;
       //   }
       // },
-      record() {
+      makeRecord() {
         // TODO
+        // 只有当通话中才能够录音
+        // 若正在录音（clock > 0），则不能录音
+        if(this.call.progress !== 1 || this.record.clock > 0) {
+          return false;
+        }
+        // 展示录音效果
         this.show.record = true;
+        // 开始录音计时
+        this.startRecordTimer();
         if (typeof this.onRecord === 'function') {
           this.onRecord();
         }
       },
+      startRecordTimer() {
+        if (this.record.clock >= 0) {
+          this.record.timer = setInterval(() => {
+            this.record.clock++;
+          }, 1000);
+        }
+      },
+      clearRecordTimer() {
+        clearInterval(this.record.timer);
+        this.record.clock = 0;
+      },
       finishRecord() {
-
+        // 展示录音效果
+        this.show.record = false;
+        this.clearRecordTimer();
+        if (typeof this.onRecordDone === 'function') {
+          this.onRecordDone();
+        }
       }
     }
   };

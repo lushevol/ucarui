@@ -95,6 +95,8 @@
         iconClass: '',
         onClose: null,
         onClick: null,
+        onSetSound: null,
+        onSetMic: null,
         closed: false,
         verticalOffset: 0,
         timer: null,
@@ -191,6 +193,16 @@
         } else if (newVal === 2) {
           this.close();
         }
+      },
+      'show.mic': function(newVal) {
+        if (typeof this.onSetMic === 'function') {
+          this.onSetMic(newVal);
+        }
+      },
+      'show.sound': function(newVal) {
+        if (typeof this.onSetSound === 'function') {
+          this.onSetSound(newVal);
+        }
       }
     },
     mounted() {
@@ -275,7 +287,7 @@
         // 开始录音计时
         this.startRecordTimer();
         if (typeof this.onRecord === 'function') {
-          this.onRecord();
+          this.onRecord(this.show.record);
         }
       },
       startRecordTimer() {

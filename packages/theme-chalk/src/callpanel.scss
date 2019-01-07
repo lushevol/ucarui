@@ -67,8 +67,8 @@
         color: #333;
         cursor: pointer;
         .avatar_pic {
-          border-radius: 50%;
-          border: 1px solid;
+          // border-radius: 50%;
+          // border: 1px solid;
           width: $--callpanel-avatar-width;
           height: $--callpanel-avatar-width;
         }
@@ -99,6 +99,9 @@
       flex: 1;
       margin-left: 0 !important;
       border-radius: unset;
+      .el-icon-phone {
+        transform: rotate(135deg);
+      }
     }
   }
 

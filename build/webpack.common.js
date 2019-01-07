@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(process.cwd(), './lib'),
     publicPath: '/dist/',
-    filename: 'element-ui.common.js',
+    filename: 'ucarui.common.js',
     chunkFilename: '[id].js',
     libraryTarget: 'commonjs2'
   },
@@ -74,6 +74,14 @@ module.exports = {
         query: {
           limit: 10000,
           name: path.posix.join('static', '[name].[hash:7].[ext]')
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: path.posix.join('static', 'media/[name].[hash:7].[ext]')
         }
       }
     ]

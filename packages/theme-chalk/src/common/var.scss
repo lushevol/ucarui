@@ -68,6 +68,10 @@ $--border-radius-base: 4px !default;
 $--border-radius-small: 2px !default;
 $--border-radius-circle: 100% !default;
 
+/* cutting line
+-------------------------- */
+$--cutting-line-color: #ebebeb !default;
+
 /* Box-shadow
 -------------------------- */
 $--box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
@@ -310,6 +314,36 @@ $--notification-success-color: $--color-success !default;
 $--notification-info-color: $--color-info !default;
 $--notification-warning-color: $--color-warning !default;
 $--notification-danger-color: $--color-danger !default;
+
+/* Callpanel
+-------------------------- */
+$--callpanel-width: 330px !default;
+$--callpanel-height: 190px !default;
+$--callpanel-padding: 14px 26px 14px 13px !default;
+$--callpanel-radius: 8px !default;
+$--callpanel-shadow: $--box-shadow-light !default;
+$--callpanel-border-color: $--border-color-lighter !default;
+$--callpanel-icon-size: 24px !default;
+$--callpanel-close-font-size: $--message-close-size !default;
+$--callpanel-group-margin: 13px !default;
+$--callpanel-font-size: $--font-size-base !default;
+$--callpanel-color: $--color-text-regular !default;
+$--callpanel-title-font-size: 16px !default;
+$--callpanel-title-color: $--color-text-primary !default;
+$--callpanel-header-height: 25px !default;
+$--callpanel-header-padding: 5px !default;
+$--callpanel-footer-height: 40px !default;
+$--callpanel-avatar-width: 64px !default;
+
+$--callpanel-tips-height: 30px !default;
+
+$--callpanel-close-color: $--color-text-secondary !default;
+$--callpanel-close-hover-color: $--color-text-regular !default;
+
+$--callpanel-success-color: $--color-success !default;
+$--callpanel-info-color: $--color-info !default;
+$--callpanel-warning-color: $--color-warning !default;
+$--callpanel-danger-color: $--color-danger !default;
 
 /* Input
 -------------------------- */

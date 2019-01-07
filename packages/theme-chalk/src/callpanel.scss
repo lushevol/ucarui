@@ -1,0 +1,139 @@
+@import "mixins/mixins";
+@import "common/var";
+
+@include b(callpanel) {
+  display: flex;
+  flex-direction: column;
+  width: $--callpanel-width;
+  max-height: $--callpanel-height;
+  // padding: $--callpanel-padding;
+  // border-radius: $--callpanel-radius;
+  box-sizing: border-box;
+  border: 1px solid $--callpanel-border-color;
+  position: fixed;
+  background-color: $--color-white;
+  box-shadow: $--callpanel-shadow;
+  transition: opacity .3s, transform .3s, left .3s, right .3s, top 0.4s, bottom .3s;
+  overflow: hidden;
+
+  &.right {
+    right: 16px;
+  }
+
+  &.left {
+    left: 16px;
+  }
+
+  @include e(header) {
+    height: $--callpanel-header-height;
+    padding: $--callpanel-header-padding;
+    border-bottom: 1px solid $--cutting-line-color;
+    display: flex;
+    span {
+      margin: 0;
+      padding: 0;
+      flex: 1;
+    }
+    .operation {
+      display: flex;
+      cursor: pointer;
+      .mic, .sound, .record {
+        img {
+          margin: 3px;
+          height: $--callpanel-header-height - 6px;
+        }
+      }
+      // .el-dropdown {
+      //   margin: 3px;
+      // }
+    }
+  }
+
+  @include e(tips) {
+    height: $--callpanel-tips-height;
+    .record {
+      background: lightblue;
+      text-align: center;
+    }
+  }
+
+  @include e(content) {
+    flex: 1;
+    display: flex;
+    &_avatar {
+      padding: 10px;
+      width: $--callpanel-avatar-width;
+      a {
+        color: #333;
+        cursor: pointer;
+        .avatar_pic {
+          // border-radius: 50%;
+          // border: 1px solid;
+          width: $--callpanel-avatar-width;
+          height: $--callpanel-avatar-width;
+        }
+      }
+    }
+    &_info {
+      flex: 1;
+      padding-left: 20px;
+    }
+    &_timer {
+      border-left: 1px solid #ebeef5;
+      text-align: center;
+      width: 40%;
+      .clock {
+        margin: 0;
+      }
+    }
+  }
+
+  @include e(footer) {
+    height: $--callpanel-footer-height;
+    display: flex;
+    .accept {
+      width: 50%;
+      border-radius: unset;
+    }
+    .hungup {
+      flex: 1;
+      margin-left: 0 !important;
+      border-radius: unset;
+      .el-icon-phone {
+        transform: rotate(135deg);
+      }
+    }
+  }
+
+  .el-icon-success {
+    color: $--callpanel-success-color;
+  }
+
+  .el-icon-error {
+    color: $--callpanel-danger-color;
+  }
+
+  .el-icon-info {
+    color: $--callpanel-info-color;
+  }
+
+  .el-icon-warning {
+    color: $--callpanel-warning-color;
+  }
+}
+
+.el-callpanel-fade-enter {
+  &.right {
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  &.left {
+    left: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.el-callpanel-fade-leave-active {
+  opacity: 0;
+}

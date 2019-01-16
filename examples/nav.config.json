@@ -158,6 +158,10 @@
               "title": "Tree 树形控件"
             },
             {
+              "path": "/timeline-tree",
+              "title": "Timeline Tree 树形控件"
+            },
+            {
               "path": "/pagination",
               "title": "Pagination 分页"
             },
@@ -412,6 +416,10 @@
               "title": "Tree"
             },
             {
+              "path": "/timeline-tree",
+              "title": "TimelineTree"
+            },
+            {
               "path": "/pagination",
               "title": "Pagination"
             },
@@ -660,6 +668,10 @@
             {
               "path": "/tree",
               "title": "Tree"
+            },
+            {
+              "path": "/timeline-tree",
+              "title": "Timeline Tree"
             },
             {
               "path": "/pagination",

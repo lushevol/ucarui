@@ -40,6 +40,7 @@ import Tabs from '../packages/tabs/index.js';
 import TabPane from '../packages/tab-pane/index.js';
 import Tag from '../packages/tag/index.js';
 import Tree from '../packages/tree/index.js';
+import TimelineTree from '../packages/timeline-tree/index.js';
 import Alert from '../packages/alert/index.js';
 import Notification from '../packages/notification/index.js';
 import Callpanel from '../packages/callpanel/index.js';
@@ -113,6 +114,7 @@ const components = [
   TabPane,
   Tag,
   Tree,
+  TimelineTree,
   Alert,
   Callpanel,
   Slider,
@@ -221,6 +223,7 @@ module.exports = {
   TabPane,
   Tag,
   Tree,
+  TimelineTree,
   Alert,
   Notification,
   Callpanel,

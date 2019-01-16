@@ -1,0 +1,122 @@
+@import "mixins/mixins";
+@import "common/var";
+@import "common/transition";
+@import "checkbox";
+
+@include b(timeline-tree) {
+  position: relative;
+  cursor: default;
+  background: $--color-white;
+  color: $--timeline-tree-text-color;
+
+  @include e(empty-block) {
+    position: relative;
+    min-height: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @include e(empty-text) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: mix($--color-primary, rgb(158, 68, 0), 50%);
+  }
+
+  @include e(drop-indicator) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: $--color-primary;
+  }
+}
+
+@include b(timeline-tree-node) {
+  white-space: nowrap;
+  outline: none;
+  &:focus { /* focus */
+    > .el-timeline-tree-node__content {
+      background-color: $--timeline-tree-node-hover-color;
+    }
+  }
+
+  @include when(drop-inner) {
+    > .el-timeline-tree-node__content .el-timeline-tree-node__label {
+      background-color: $--color-primary;
+      color: #fff;
+    }
+  }
+
+  @include e(content) {
+    display: flex;
+    align-items: center;
+    height: 26px;
+    cursor: pointer;
+
+    & > .el-timeline-tree-node__expand-icon {
+      padding: 6px;
+    }
+    & > .el-checkbox {
+      margin-right: 8px;
+    }
+    &:hover {
+      background-color: $--timeline-tree-node-hover-color;
+    }
+
+    .el-timeline-tree.is-dragging & {
+      cursor: move;
+
+      & * {
+        pointer-events: none;
+      }
+    }
+
+    .el-timeline-tree.is-dragging.is-drop-not-allow & {
+      cursor: not-allowed;
+    }
+  }
+
+  @include e(expand-icon) {
+    cursor: pointer;
+    color: $--timeline-tree-expand-icon-color;
+    font-size: 12px;
+
+    transform: rotate(0deg);
+    transition: transform 0.3s ease-in-out;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+
+    &.is-leaf {
+      color: transparent;
+      cursor: default;
+    }
+  }
+
+  @include e(label) {
+    font-size: $--font-size-base;
+  }
+
+  @include e(loading-icon) {
+    margin-right: 8px;
+    font-size: $--font-size-base;
+    color: $--timeline-tree-expand-icon-color;
+  }
+
+  & > .el-timeline-tree-node__children {
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  &.is-expanded > .el-timeline-tree-node__children {
+    display: block;
+  }
+}
+
+.el-timeline-tree--highlight-current .el-timeline-tree-node.is-current > .el-timeline-tree-node__content {
+  background-color: mix($--color-white, $--color-primary, 92%);
+}

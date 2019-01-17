@@ -400,7 +400,7 @@
 
 :::demo
 ```html
-<el-timeline-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-timeline-tree>
+<el-timeline-tree :data="data" :expand-on-click-node="false" :props="defaultProps" @node-click="handleNodeClick"></el-timeline-tree>
 
 <script>
   export default {

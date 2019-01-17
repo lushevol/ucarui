@@ -79,6 +79,10 @@
     }
   }
 
+  @include e(detail) {
+    padding: 12px;
+  }
+
   @include e(expand-icon) {
     cursor: pointer;
     color: $--timeline-tree-expand-icon-color;

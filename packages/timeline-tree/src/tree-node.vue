@@ -52,9 +52,39 @@
     <el-collapse-transition>
       <div
         v-show="detailVisible"
-        :style="{ 'padding-left': ((node.level - 1) * tree.indent + 24) + 'px' }"
-        v-html="tree.detailDomRender && tree.detailDomRender(node)"
+        :style="{ 'margin-left': ((node.level - 1) * tree.indent + 24) + 'px' }"
+        @click.stop
         class="el-timeline-tree-node__detail">
+        <span class="key">应用:</span>
+        <span class="value">{{node.data.detail.appName}}</span>
+        <span class="key">耗时:</span>
+        <span class="value">{{node.data.detail.duration}}ms</span>
+        <span class="key">开始时间</span>
+        <span class="value">{{node.data.detail.createtime}}</span>
+        <el-collapse v-model="detailCollapse">
+          <el-collapse-item name="tags">
+            <template slot="title">
+              Tags：{{TagsText}}
+            </template>
+            <table>
+              <tr class="kv-item" v-for="(item, index) in node.data.detail.tags" :key="index">
+                <td class="key">{{item.key}}</td>
+                <td class="value">{{item.value}}</td>
+              </tr>
+            </table>
+          </el-collapse-item>
+          <el-collapse-item name="progress">
+            <template slot="title">
+              Progress：{{ProgressText}}
+            </template>
+            <table>
+              <tr class="kv-item" v-for="(item, index) in node.data.detail.progress" :key="index">
+                <td class="key">{{item.key}}</td>
+                <td class="value">{{item.value}}</td>
+              </tr>
+            </table>
+          </el-collapse-item>
+        </el-collapse>
       </div>
     </el-collapse-transition>
     <el-collapse-transition>
@@ -105,6 +135,27 @@
       }
     },
 
+    computed: {
+      TagsText() {
+        let res = ''
+        if(!this.detailCollapse.includes('tags')) {
+          this.tempTags.map(item => {
+            res += `${item.key}=${item.value} `
+          })
+        }
+        return res
+      },
+      ProgressText() {
+        let res = ''
+        if(!this.detailCollapse.includes('progress')) {
+          this.tempProgress.map(item => {
+            res += `${item.key}=${item.value} `
+          })
+        }
+        return res
+      }
+    },
+
     components: {
       ElCollapseTransition,
       ElCheckbox,
@@ -138,7 +189,20 @@
         childNodeRendered: false,
         showCheckbox: false,
         oldChecked: null,
-        oldIndeterminate: null
+        oldIndeterminate: null,
+        detailCollapse: [],
+        tempTags: [
+          {
+            key: 'params',
+            value: '[{"key":"params","value":"{}"}]'
+          }
+        ],
+        tempProgress: [
+          {
+            key: 'processId',
+            value: 63608
+          }
+        ]
       };
     },
 

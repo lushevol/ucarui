@@ -50,41 +50,48 @@
       <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
-      <div
-        v-show="detailVisible"
-        :style="{ 'margin-left': ((node.level - 1) * tree.indent + 24) + 'px' }"
-        @click.stop
-        class="el-timeline-tree-node__detail">
-        <span class="key">应用:</span>
-        <span class="value">{{node.data.detail.appName}}</span>
-        <span class="key">耗时:</span>
-        <span class="value">{{node.data.detail.duration}}ms</span>
-        <span class="key">开始时间</span>
-        <span class="value">{{node.data.detail.createtime}}</span>
-        <el-collapse v-model="detailCollapse">
-          <el-collapse-item name="tags">
-            <template slot="title">
-              Tags：{{TagsText}}
-            </template>
-            <table>
-              <tr class="kv-item" v-for="(item, index) in node.data.detail.tags" :key="index">
-                <td class="key">{{item.key}}</td>
-                <td class="value">{{item.value}}</td>
-              </tr>
-            </table>
-          </el-collapse-item>
-          <el-collapse-item name="progress">
-            <template slot="title">
-              Progress：{{ProgressText}}
-            </template>
-            <table>
-              <tr class="kv-item" v-for="(item, index) in node.data.detail.progress" :key="index">
-                <td class="key">{{item.key}}</td>
-                <td class="value">{{item.value}}</td>
-              </tr>
-            </table>
-          </el-collapse-item>
-        </el-collapse>
+      <div class="el-timeline-tree-node__detailarea">
+        <div class="el-timeline-tree-node__detailpre">
+
+        </div>
+        <div
+          v-show="detailVisible"
+          @click.stop
+          class="el-timeline-tree-node__detail">
+          <div class="summary">
+            <span class="key">应用:</span>
+            <span class="value">{{node.data.detail.appName}}</span>
+            <span class="key">耗时:</span>
+            <span class="value">{{node.data.detail.duration}}ms</span>
+            <span class="key">开始时间</span>
+            <span class="value">{{node.data.detail.createtime}}</span>
+          </div>
+          <el-collapse v-model="detailCollapse">
+            <el-collapse-item name="tags">
+              <template slot="title">
+                Tags：{{TagsText}}
+              </template>
+              <table>
+                <tr class="kv-item" v-for="(item, index) in node.data.detail.tags" :key="index">
+                  <td class="key">{{item.key}}</td>
+                  <td class="value">{{item.value}}</td>
+                </tr>
+              </table>
+            </el-collapse-item>
+            <el-collapse-item name="progress">
+              <template slot="title">
+                Progress：{{ProgressText}}
+              </template>
+              <table>
+                <tr class="kv-item" v-for="(item, index) in node.data.detail.progress" :key="index">
+                  <td class="key">{{item.key}}</td>
+                  <td class="value">{{item.value}}</td>
+                </tr>
+              </table>
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+
       </div>
     </el-collapse-transition>
     <el-collapse-transition>
@@ -139,7 +146,7 @@
       TagsText() {
         let res = ''
         if(!this.detailCollapse.includes('tags')) {
-          this.tempTags.map(item => {
+          this.node.data.detail.tags.map(item => {
             res += `${item.key}=${item.value} `
           })
         }
@@ -148,7 +155,7 @@
       ProgressText() {
         let res = ''
         if(!this.detailCollapse.includes('progress')) {
-          this.tempProgress.map(item => {
+          this.node.data.detail.progress.map(item => {
             res += `${item.key}=${item.value} `
           })
         }

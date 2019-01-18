@@ -94,9 +94,9 @@
                 查看应用日志
               </template>
               <table v-if="node.data.detail.logs">
-                <tr class="kv-item" v-for="(item, key, index) of node.data.detail.logs" :key="index">
-                  <td class="key">{{key}}</td>
-                  <td class="value">{{item}}</td>
+                <tr class="kv-item" v-for="(item, index) in node.data.detail.logs" :key="index">
+                  <td class="key">日志内容</td>
+                  <td class="value">{{item.message}}</td>
                 </tr>
               </table>
             </el-collapse-item>

@@ -83,6 +83,7 @@
         type: Boolean,
         default: true
       },
+      renderLogs: Function,
       checkOnClickNode: Boolean,
       checkDescendants: {
         type: Boolean,

@@ -177,7 +177,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 module.exports = {
-  version: '0.1.7',
+  version: '0.1.8',
   locale: locale.use,
   i18n: locale.i18n,
   install,

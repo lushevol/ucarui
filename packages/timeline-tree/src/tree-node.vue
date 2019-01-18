@@ -89,6 +89,17 @@
                 </tr>
               </table>
             </el-collapse-item>
+            <el-collapse-item name="logs">
+              <template slot="title">
+                Logs
+              </template>
+              <table v-if="node.data.detail.logs">
+                <tr class="kv-item" v-for="(item, index) in node.data.detail.logs" :key="index">
+                  <td class="key">{{item.key}}</td>
+                  <td class="value">{{item.value}}</td>
+                </tr>
+              </table>
+            </el-collapse-item>
           </el-collapse>
         </div>
 
@@ -160,6 +171,13 @@
           })
         }
         return res
+      },
+      logsText() {
+        if(this.detailCollapse.includes('logs')) {
+          if(this.tree.renderLogs) {
+            this.tree.renderLogs(this.node.data)
+          }
+        }
       }
     },
 

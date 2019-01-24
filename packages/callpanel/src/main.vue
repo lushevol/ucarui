@@ -42,6 +42,10 @@
           </div>
         </div>
       </transition>
+      <div class="el-callpanel__video">
+        <video id="remoteVideo"></video>
+        <video id="localVideo"></video>
+      </div>
       <div class="el-callpanel__content">
         <div class="el-callpanel__content_avatar">
           <a>

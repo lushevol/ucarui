@@ -5,17 +5,18 @@
         const h = this.$createElement;
 
         this.$callpanel({
-          title: '标题名称',
-          message: h('i', { style: 'color: teal'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
+          call: {
+            type: 'audio'
+          }
         });
       },
 
       open2() {
         this.$callpanel({
-          title: '提示',
-          message: '这是一条不会自动关闭的消息',
-          duration: 0
-        });
+          call: {
+            type: 'video'
+            }
+          });
       },
 
       onClose() {

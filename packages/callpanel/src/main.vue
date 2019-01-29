@@ -1,7 +1,7 @@
 <template>
   <transition name="el-callpanel-fade">
     <div
-      :class="['el-callpanel', customClass, horizontalClass]"
+      :class="['el-callpanel', customClass, horizontalClass, mediaClass]"
       v-show="visible"
       :style="positionStyle"
       @click="click"
@@ -42,9 +42,9 @@
           </div>
         </div>
       </transition>
-      <div class="el-callpanel__video">
+      <div class="el-callpanel__video" v-if="mediaClass === 'video'">
         <video id="remoteVideo"></video>
-        <video id="localVideo"></video>
+        <!-- <video id="localVideo"></video> -->
       </div>
       <div class="el-callpanel__content">
         <div class="el-callpanel__content_avatar">
@@ -140,6 +140,10 @@
 
       horizontalClass() {
         return this.position.indexOf('right') > -1 ? 'right' : 'left';
+      },
+
+      mediaClass() {
+        return this.call.type;
       },
 
       verticalProperty() {

@@ -69,7 +69,7 @@
           <el-collapse v-model="detailCollapse">
             <el-collapse-item name="tags">
               <template slot="title">
-                Tags：{{TagsText}}
+                <div class="tags-title">Tags：{{TagsText}}</div>
               </template>
               <table>
                 <tr class="kv-item" v-for="(item, index) in node.data.detail.tags" :key="index">
@@ -80,7 +80,7 @@
             </el-collapse-item>
             <el-collapse-item name="progress">
               <template slot="title">
-                Progress：{{ProgressText}}
+                <div class="progress-title">Progress：{{ProgressText}}</div>
               </template>
               <table>
                 <tr class="kv-item" v-for="(item, index) in node.data.detail.progress" :key="index">
@@ -93,12 +93,11 @@
               <template slot="title">
                 查看应用日志
               </template>
-              <table v-if="node.data.detail.logs">
-                <tr class="kv-item" v-for="(item, index) in node.data.detail.logs" :key="index">
-                  <td class="key">日志内容</td>
-                  <td class="value">{{item.message}}</td>
-                </tr>
-              </table>
+              <div v-if="node.data.detail.logs">
+                <div class="kv-item" v-for="(item, index) in node.data.detail.logs" :key="index">
+                  <div class="value">{{item.message}}</div>
+                </div>
+              </div>
             </el-collapse-item>
           </el-collapse>
         </div>

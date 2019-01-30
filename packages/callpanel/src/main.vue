@@ -246,6 +246,14 @@
         }
       },
 
+      noAlertRing() {
+        this.$refs.ringTone.pause();
+      },
+
+      noWaitRing() {
+        this.$refs.ringBackTone.pause();
+      },
+
       clearTimer() {
         clearInterval(this.timer);
         this.info.timerClock = 0;

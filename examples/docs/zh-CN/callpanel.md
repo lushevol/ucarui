@@ -40,12 +40,12 @@
   <el-button
     plain
     @click="open">
-    可自动关闭
+    打开音频面板
   </el-button>
   <el-button
     plain
     @click="open2">
-    不会自动关闭
+    打开视频面板
     </el-button>
 </template>
 

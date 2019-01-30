@@ -1,6 +1,6 @@
 {
   "name": "ucarui-theme-chalk",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Element component chalk theme.",
   "main": "lib/index.css",
   "style": "lib/index.css",

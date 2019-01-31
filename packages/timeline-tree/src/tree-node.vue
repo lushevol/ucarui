@@ -202,7 +202,7 @@
       return {
         tree: null,
         expanded: false,
-        detailVisible: false,
+        detailVisible: true,
         childNodeRendered: false,
         showCheckbox: false,
         oldChecked: null,

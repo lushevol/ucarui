@@ -29,6 +29,11 @@
     left: 16px;
   }
 
+  &.full-size {
+    width: $--callpanel-fullsize-width;
+    height: $--callpanel-fullsize-height;
+  }
+
   @include e(header) {
     height: $--callpanel-header-height;
     padding: $--callpanel-header-padding;
@@ -42,7 +47,7 @@
     .operation {
       display: flex;
       cursor: pointer;
-      .mic, .sound, .record {
+      .mic, .sound, .record, .expand {
         img {
           margin: 3px;
           height: $--callpanel-header-height - 6px;
@@ -56,9 +61,29 @@
 
   @include e(video) {
     height: $--callpanel-video-height;
-    #remoteVideo {
-      width: 100%;
-      height: 100%;
+    position: relative;
+    #remoteVideo, #localVideo {
+      position: absolute;
+      cursor: pointer;
+      z-index: 999;
+      right: 0;
+      bottom: 0;
+      width: 25%;
+      height: 25%;
+    }
+    &.remote {
+      #remoteVideo {
+        width: 100%;
+        height: 100%;
+        z-index: 998;
+      }
+    }
+    &.local {
+      #localVideo {
+        width: 100%;
+        height: 100%;
+        z-index: 998;
+      }
     }
   }
 

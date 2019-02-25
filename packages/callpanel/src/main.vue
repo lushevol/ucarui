@@ -1,7 +1,7 @@
 <template>
   <transition name="el-callpanel-fade">
     <div
-      :class="['el-callpanel', customClass, horizontalClass, mediaClass]"
+      :class="['el-callpanel', customClass, horizontalClass, mediaClass, sizeClass]"
       v-show="visible"
       :style="positionStyle"
       @click="click"
@@ -22,8 +22,12 @@
             <img v-show="show.sound" src="~examples/assets/images/sound.svg" title="点击静音">
             <img v-show="!show.sound" src="~examples/assets/images/mute.svg" title="取消静音">
           </div>
-          <div class="record" @click="makeRecord">
+          <div class="record" @click="makeRecord" v-if="mediaClass === 'audio'">
             <img src="~examples/assets/images/record.svg" />
+          </div>
+          <div class="expand" @click="toggleSize" v-else-if="mediaClass === 'video'">
+            <img src="~examples/assets/images/shrink.svg" v-if="show.fullSize"/>
+            <img src="~examples/assets/images/expand.svg" v-else/>
           </div>
           <!-- <el-dropdown @command="handleCommand">
             <span>...</span>
@@ -42,9 +46,9 @@
           </div>
         </div>
       </transition>
-      <div class="el-callpanel__video" v-if="mediaClass === 'video'">
+      <div :class="['el-callpanel__video', mainClass]" v-if="mediaClass === 'video'" @click="toggleVideoMain" title="点击切换">
         <video id="remoteVideo"></video>
-        <!-- <video id="localVideo"></video> -->
+        <video id="localVideo"></video>
       </div>
       <div class="el-callpanel__content">
         <div class="el-callpanel__content_avatar">
@@ -107,7 +111,7 @@
         position: 'bottom-right',
         info: {
           userName: '陌生号码',
-          pnumber: '......',
+          pnumber: '未知',
           timerClock: 0
         },
         call: {
@@ -126,7 +130,9 @@
         show: {
           record: false, // 录音组件
           mic: true, // 语音按钮
-          sound: true // 声音按钮
+          sound: true, // 声音按钮
+          fullSize: false, // 是否是全屏显示
+          main: 'remote'
         }
       };
     },
@@ -144,6 +150,14 @@
 
       mediaClass() {
         return this.call.type;
+      },
+
+      sizeClass() {
+        return this.show.fullSize ? 'full-size' : '';
+      },
+
+      mainClass() {
+        return this.show.main;
       },
 
       verticalProperty() {
@@ -323,6 +337,16 @@
         this.clearRecordTimer();
         if (typeof this.onRecordDone === 'function') {
           this.onRecordDone();
+        }
+      },
+      toggleSize() {
+        this.show.fullSize = !this.show.fullSize;
+      },
+      toggleVideoMain() {
+        if (this.show.main === 'remote') {
+          this.show.main = 'local';
+        } else if (this.show.main === 'local') {
+          this.show.main = 'remote';
         }
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <transition name="el-callpanel-fade">
     <div
-      :class="['el-callpanel', customClass, horizontalClass, mediaClass, sizeClass]"
+      :class="['el-callpanel', customClass, horizontalClass, mediaClass, sizeClass, progressClass]"
       v-show="visible"
       :style="positionStyle"
       @click="click"
@@ -47,8 +47,15 @@
         </div>
       </transition>
       <div :class="['el-callpanel__video', mainClass]" v-if="mediaClass === 'video'" @click="toggleVideoMain" title="点击切换">
-        <video id="remoteVideo"></video>
-        <video id="localVideo"></video>
+        <video id="remoteVideo" poster="http://img1.cache.netease.com/catchpic/F/F0/F05747B94429488D18E438BB2768E6CA.jpg"></video>
+        <video id="localVideo" muted="muted"></video>
+        <div class="el-callpanel__video_timer" v-if="info.timerClock > 0" style="display: none">
+          <h3 class="clock">{{timerMin}} : {{timerSec}}</h3>
+        </div>
+        <div class="el-callpanel__controller" style="display: none">
+            <el-button type="success" icon="el-icon-phone" @click.stop="acceptCall" v-if="call.progress === 0 && call.direction === 'in'" circle></el-button>
+            <el-button type="danger" icon="el-icon-phone" @click.stop="hungupCall" circle></el-button>
+        </div>
       </div>
       <div class="el-callpanel__content">
         <div class="el-callpanel__content_avatar">
@@ -65,9 +72,13 @@
           <h3 class="clock">{{timerMin}} : {{timerSec}}</h3>
         </div>
       </div>
-      <div class="el-callpanel__footer">
-          <el-button type="success" class="accept" icon="el-icon-phone" @click="acceptCall" v-if="call.progress === 0 && call.direction === 'in'">接听</el-button>
-          <el-button type="danger" class="hungup" icon="el-icon-phone" @click="hungupCall">挂断</el-button>
+      <div class="el-callpanel__controller">
+        <div class="accept" v-if="call.progress === 0 && call.direction === 'in'">
+          <el-button type="success" icon="el-icon-phone" @click="acceptCall">接听</el-button>
+        </div>
+        <div class="hungup">
+          <el-button type="danger" icon="el-icon-phone" @click="hungupCall">挂断</el-button>
+        </div>
       </div>
     <div :style="{ display: 'none' }">
         <audio id="remoteAudio"></audio ><audio id="localAudio" muted="muted"></audio>
@@ -181,6 +192,15 @@
       },
       recordTimerMin() {
         return Math.floor(this.record.clock / 60);
+      },
+      progressClass() {
+        if (this.call.progress === 0) {
+          return 'waiting';
+        } else if (this.call.progress === 1) {
+          return 'calling';
+        } else if (this.call.progress === 2) {
+          return 'done';
+        }
       },
       progressText() {
         if (this.call.progress === 0) {

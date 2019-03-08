@@ -32,6 +32,43 @@
   &.full-size {
     width: $--callpanel-fullsize-width;
     height: $--callpanel-fullsize-height;
+    .el-callpanel__video {
+      height: 100%;
+      .el-callpanel__video_timer {
+        text-align: right;
+        z-index: 4;
+      }
+      .el-callpanel__controller {
+        display: inline-block !important;
+        transition: 0.5s;
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        z-index: 3;
+        text-align: center;
+      }
+    }
+    .el-callpanel__content {
+      display: none !important;
+    }
+    .el-callpanel__controller {
+      display: none;
+    }
+    &.calling {
+      .el-callpanel__video {
+        .el-callpanel__video_timer {
+          display: block !important;
+        }
+        .el-callpanel__controller {
+          display: none !important;
+        }
+        &:hover {
+          .el-callpanel__controller {
+            display: inline-block !important;
+          }
+        }
+      }
+    }
   }
 
   @include e(header) {
@@ -61,11 +98,12 @@
 
   @include e(video) {
     height: $--callpanel-video-height;
+    background-color: #00000019;
     position: relative;
     #remoteVideo, #localVideo {
       position: absolute;
       cursor: pointer;
-      z-index: 999;
+      z-index: 2;
       right: 0;
       bottom: 0;
       width: 25%;
@@ -75,14 +113,14 @@
       #remoteVideo {
         width: 100%;
         height: 100%;
-        z-index: 998;
+        z-index: 1;
       }
     }
     &.local {
       #localVideo {
         width: 100%;
         height: 100%;
-        z-index: 998;
+        z-index: 1;
       }
     }
   }
@@ -126,19 +164,25 @@
     }
   }
 
-  @include e(footer) {
+  @include e(controller) {
     height: $--callpanel-footer-height;
     display: flex;
     .accept {
       width: 50%;
-      border-radius: unset;
+      .el-button:not(.is-circle) {
+        border-radius: unset;
+        width: 100%;
+      }
     }
     .hungup {
       flex: 1;
       margin-left: 0 !important;
-      border-radius: unset;
-      .el-icon-phone {
-        transform: rotate(135deg);
+      .el-button:not(.is-circle) {
+        border-radius: unset;
+        width: 100%;
+        .el-icon-phone {
+          transform: rotate(135deg);
+        }
       }
     }
   }

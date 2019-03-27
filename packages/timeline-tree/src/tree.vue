@@ -16,6 +16,7 @@
       :render-after-expand="renderAfterExpand"
       :key="getNodeKey(child)"
       :render-content="renderContent"
+      :collapseFlag="collapseFlag"
       @node-expand="handleNodeExpand">
     </el-timeline-tree-node>
     <div class="el-timeline-tree__empty-block" v-if="isEmpty">
@@ -58,7 +59,8 @@
           draggingNode: null,
           dropNode: null,
           allowDrop: true
-        }
+        },
+        collapseFlag: false
       };
     },
 

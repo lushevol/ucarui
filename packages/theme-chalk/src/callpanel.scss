@@ -1,5 +1,6 @@
 @import "mixins/mixins";
 @import "common/var";
+@import "vue-transform";
 
 @include b(callpanel) {
   display: flex;
@@ -15,14 +16,14 @@
   // border-radius: $--callpanel-radius;
   box-sizing: border-box;
   border: 1px solid $--callpanel-border-color;
-  position: fixed;
+  // position: fixed;
   background-color: $--color-white;
   box-shadow: $--callpanel-shadow;
   transition: opacity .3s, transform .3s, left .3s, right .3s, top 0.4s, bottom .3s;
   overflow: hidden;
 
   &.right {
-    right: 16px;
+    // right: 16px;
   }
 
   &.left {

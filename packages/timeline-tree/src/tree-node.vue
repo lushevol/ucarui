@@ -118,6 +118,7 @@
           :render-after-expand="renderAfterExpand"
           :key="getNodeKey(child)"
           :node="child"
+          :collapseFlag="collapseFlag"
           @node-expand="handleChildNodeExpand">
         </el-timeline-tree-node>
       </div>
@@ -149,7 +150,8 @@
       renderAfterExpand: {
         type: Boolean,
         default: true
-      }
+      },
+      collapseFlag: Boolean
     },
 
     computed: {
@@ -245,6 +247,12 @@
             this.tree.renderLogs(this.node.data)
           }
         }
+      },
+
+      collapseFlag(newVal) {
+        if(newVal) {
+          this.detailVisible = false
+        }
       }
     },
 
@@ -335,7 +343,9 @@
         this.tree.$emit('tree-node-drag-end', event, this);
       }
     },
-
+    mounted() {
+      this.detailVisible = !this.collapseFlag
+    },
     created() {
       const parent = this.$parent;
 

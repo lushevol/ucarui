@@ -95,7 +95,7 @@
               </template>
               <div v-if="node.data.detail.logs">
                 <div class="kv-item" v-for="(item, index) in node.data.detail.logs" :key="index">
-                  <div class="value">{{item.message}}</div>
+                  <pre class="value" v-html="item"></pre>
                 </div>
               </div>
             </el-collapse-item>

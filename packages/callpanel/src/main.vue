@@ -1,4 +1,5 @@
 <template>
+  <!-- 
   <free-transform
     :key="id"
     :x="0"
@@ -10,7 +11,8 @@
     :angle="0"
     :offset-x="50"
     :offset-y="50"
-    :disable-scale="true">
+    :disable-scale="true"> 
+  -->
   <transition name="el-callpanel-fade">
     <div
       :class="['el-callpanel', customClass, horizontalClass, mediaClass, sizeClass, progressClass]"
@@ -100,12 +102,12 @@
     </div>
     </div>
   </transition>
-  </free-transform>
+  <!-- </free-transform> -->
 </template>
 
 <script type="text/babel">
   import ElButton from '../../button';
-  import FreeTransform from 'vue-free-transform';
+  // import FreeTransform from 'vue-free-transform';
   const ringToneWav = require('../../../src/assets/sounds/ringtone.wav');
   const ringBackToneWav = require('../../../src/assets/sounds/ringbacktone.mp3');
   const dtmfToneWav = require('../../../src/assets/sounds/dtmf.wav');
@@ -163,8 +165,8 @@
       };
     },
     components: {
-      ElButton,
-      FreeTransform
+      ElButton
+      // FreeTransform
     },
     computed: {
       typeClass() {

@@ -178,6 +178,9 @@
       },
 
       mediaClass() {
+        if (this.call.type === 'video') {
+          this.show.fullSize = true;
+        }
         return this.call.type;
       },
 
@@ -317,6 +320,9 @@
             this.info.timerClock++;
           }, 1000);
         }
+      },
+      panelCallbegin() {
+        this.call.progress = 1;
       },
       acceptCall() {
         this.call.progress = 1;

@@ -273,7 +273,14 @@
       this.$refs.ringBackTone.src = ringBackToneWav;
       this.$refs.dtmfTone.src = dtmfToneWav;
       if (this.call.direction === 'in') {
+        this.$refs.ringTone.volume = 0.2
         this.$refs.ringTone.play();
+        setTimeout(() => {
+          this.$refs.ringTone.volume = 0.5
+          setTimeout(() => {
+            this.$refs.ringTone.volume = 0.8
+          }, 1000);
+        }, 1000);
       } else if (this.call.direction === 'out') {
         this.$refs.ringBackTone.play();
       }
